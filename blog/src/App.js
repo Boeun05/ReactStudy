@@ -10,11 +10,11 @@ function App() {
 
   function 제목바꾸기(){
     let newArray = [...글제목]
-    newArray.sort()
+    newArray[0] ='여자 코트 추천'
     글제목변경(newArray)
   }
 
-  return (
+  return ( 
     <div className="App">
       <div className="black-nav">
         <div>개발 Blog</div>
@@ -31,8 +31,18 @@ function App() {
         <p>2월 19일 발행</p>
         <hr></hr>
       </div>
+      <Modal></Modal>
     </div>
   );
 }
 
+function Modal(){ //컴포넌트 만들땐 대문자로 시작
+  return(
+    <div className = "modal">
+      <h2>제목</h2>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  )
+}
 export default App;
