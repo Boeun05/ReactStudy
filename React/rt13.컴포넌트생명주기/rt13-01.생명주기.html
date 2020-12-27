@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>컴포넌트 생명주기</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+</head>
+
+<body>
+    <pre>
+        컴포넌트 생명주기
+        
+        작업 
+            1. App 컴포넌트를 만드시오
+                state 에 counter : 0 으로 설정
+            2. App 컴포넌트에 버튼 추가하고 click 이벤트를 설정
+                <button onClick={this.handler}> setState</button>
+                click 이벤트 핸들러 작성시 화살표 함수를 사용하시오
+
+        기능추가:    
+            1. this.state.counter 값을 화면에 출력되게 하시오. 
+
+        <img src="../images/react_life_cycle.jpg" width="800px" height="600px">
+    </pre>
+    <hr>
+
+    <div id="app">
+    </div>
+</body>
+
+<!-- react 플러그인 include   -->
+<!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">/* JSX를 자바스크립트로 변환 */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"> /* import { React} from "react"; */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">/* import { ReactDOM } from "react-dom"; */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.js"> /* import {Redux} from "redux"; */ </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.2/react-redux.js">/* import {ReactRedux} from "react-redux"; */</script>
+<script type="text/babel">
+
+class Counter extends React.Component {
+    state = {
+        // 상태값(변수)을 정의한다.
+        counter : 0
+
+    }
+    componentDidUpdate(){
+        console.log('updated')
+    }
+    handler = (event)=>{
+        // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
+        console.log(event.target);//
+        this.setState({
+            ...this.state,
+            counter: this.state.counter + 1
+        })
+    }
+    render() {
+        return (
+            <div>
+                <button onClick={this.handler}>{this.state.counter}</button>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Counter></Counter>, document.getElementById('app')
+)
+
+//export default Counter;
+</script>
+</html>
+
+<!-- react 플러그인 include   -->
+<!-- 주의: 사이트를 배포할 때는 'development.js'를 'production.min.js'로 대체하세요. -->
