@@ -1,15 +1,7 @@
 import React from 'react'
-import './App.css';
+import UserList from './UserList'
 
-function User({user}) {
-  return (
-    <div>
-      <b>{user.username}</b> <span>({user.email})</span>
-    </div>
-  )
-}
-
-function UserList(){
+function App(){
   const users = [
     {
       id: 1,
@@ -25,22 +17,18 @@ function UserList(){
       id: 3,
       username: 'boe',
       email: 'public.boeun3'
-    },
-    {
-      id: 4,
-      username: 'bo',
-      email: 'public.boeun4'
-    },
+    }
   ]
 
+  const nextId = useRef(4)
+  const onCreate = () => {
+    
+    nextId.current += 1
+  }
   return(
-    <div>
-      {users.map((user, index) => 
-        <User user = {user} key = {index}/>
-      )}
-    </div>
+    <UserList users = {users}/>
   )
 }
 
 
-export default UserList;
+export default App;
