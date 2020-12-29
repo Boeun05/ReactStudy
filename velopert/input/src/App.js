@@ -1,63 +1,46 @@
-import React, {useState, useRef} from 'react'
+import React from 'react'
 import './App.css';
 
-function App() {
-  const [inputs, setInputs] = useState({
-    name: '보은',
-    nickname: '송'
-  })
-
-  const nameInput = useRef()
-
-  const {name, nickname} = inputs
-  
-  
-
-  const onChange = (e) => {
-    const {value, name} = e.target
-    
-    setInputs({
-      ...inputs,
-      [name]: value
-    })
-    console.log(inputs)
-    
-  }
-  
-  
-  
-
-  const onReset = () => {
-    setInputs({
-      name: '',
-      nickname: ''
-    })
-    nameInput.current.focus()
-  }
-
+function User({user}) {
   return (
     <div>
-      <input 
-        name="name" 
-        placeholder='이름' 
-        onChange = {onChange} 
-        value = {name} 
-        ref = {nameInput}
-      />
-      <input 
-        name="nickname" 
-        placeholder='닉네임'
-        onChange = {onChange} 
-        value = {nickname}
-      />
-      <button onClick = {onReset}>초기화</button>
-      <div>
-        <b>값</b>
-        {name}({nickname})
-      </div>
+      <b>{user.username}</b> <span>({user.email})</span>
+    </div>
+  )
+}
+
+function UserList(){
+  const users = [
+    {
+      id: 1,
+      username: 'boeun',
+      email: 'public.boeun1'
+    },
+    {
+      id: 2,
+      username: 'boeu',
+      email: 'public.boeun2'
+    },
+    {
+      id: 3,
+      username: 'boe',
+      email: 'public.boeun3'
+    },
+    {
+      id: 4,
+      username: 'bo',
+      email: 'public.boeun4'
+    },
+  ]
+
+  return(
+    <div>
+      {users.map((user, index) => 
+        <User user = {user} key = {index}/>
+      )}
     </div>
   )
 }
 
 
-export default App;
+export default UserList;
