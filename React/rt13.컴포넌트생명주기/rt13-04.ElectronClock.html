@@ -46,7 +46,68 @@
 
     <div id="app"></div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">/* JSX를 자바스크립트로 변환 */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"> /* import { React} from "react"; */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">/* import { ReactDOM } from "react-dom"; */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.js"> /* import {Redux} from "redux"; */ </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.2/react-redux.js">/* import {ReactRedux} from "react-redux"; */</script>
+<script type="text/babel">
 
+class ElectronClock extends React.Component {
+    state = {
+        hms: '',
+        timer: null
+    }
+
+    style = {
+        style1:{
+            fontSize: '80pt'
+        }
+    }
+
+    addZero(value){
+        var href = "00" +value ;
+        var ext = href.substr(-2); // href.substr(href.lenght-2, 2);
+        return ext
+    }
+
+    componentDidMount() {
+        // 마운트 완료 후에  : 페이지 load 될 때 한번
+        this.state.timer = setInterval(()=>{ 
+            const d = new Date();
+            const h = this.addZero(d.getHours());
+            const m = this.addZero(d.getMinutes());
+            const s = this.addZero(d.getSeconds());
+
+            this.setState(
+                {
+                    ...this.state,
+                    hms: `${h} : ${m} : ${s}`
+                }
+            )
+        },1000)
+    }
+    render() {
+        
+        return (
+            <div style = {this.style.style1}>
+                {this.state.hms}
+            </div>
+        );
+    }
+}
+
+
+
+
+
+    ReactDOM.render(
+        <ElectronClock></ElectronClock>, document.getElementById('app')
+    )
+
+
+//export default rt07-13.ElectronClock;
+</script>
 </html>
 
 <!-- react 플러그인 include   -->

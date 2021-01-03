@@ -29,6 +29,58 @@
     </div>
 </body>
 
+<!-- react 플러그인 include   -->
+<!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">/* JSX를 자바스크립트로 변환 */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"> /* import { React} from "react"; */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">/* import { ReactDOM } from "react-dom"; */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.js"> /* import {Redux} from "redux"; */ </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.2/react-redux.js">/* import {ReactRedux} from "react-redux"; */</script>
+<script type="text/babel">
+    //import React from "react";
+    //import ReactDOM from "react-dom"
+    
+    console.log(React);
+    console.log(ReactDOM);
+    
+    class TickTock extends React.Component {
+        state = {
+            // 상태값(변수)을 정의한다.
+            counter: 0,
+            timer: null
+        }
+        
+        componentDidMount() {
+            // 마운트 완료 후에  : 페이지 load 될 때 한번
+            this.state.timer = setInterval(()=> 
+                this.setState(
+                    {
+                        ...this.state,
+                        counter: this.state.counter+1
+                    }
+                )
+            ,1000)
+        }
+        componentDidUpdate(prevProps, prevState) {
+            // 업데이트 완료 후에 : 여러번, state 가 변경될 때마다
+            if(this.state.counter === 5){
+                clearInterval(this.state.timer)
+            }
+        }
+        render() {
+            return (
+                <div>
+                    {this.state.counter}
+                </div>
+            );
+        }
+    }
+    
+    //export default TickTock;
+    ReactDOM.render(
+        <TickTock></TickTock>, document.getElementById('app')
+    )
+</script>
 </html>
 
 <!-- react 플러그인 include   -->
